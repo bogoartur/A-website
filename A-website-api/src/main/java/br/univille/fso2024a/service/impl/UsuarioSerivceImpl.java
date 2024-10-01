@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.univille.fsoweb20242.entity.Cliente;
-import br.univille.fsoweb20242.repository.ClienteRepository;
-import br.univille.fsoweb20242.service.ClienteService;
+import br.univille.fso2024a.entity.Usuario;
+import br.univille.fso2024a.repository.UsuarioRepository;
+import br.univille.fso2024a.service.UsuarioService;
 
 @Service
 public class UsuarioSerivceImpl implements UsuarioService {
