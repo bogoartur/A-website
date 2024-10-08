@@ -28,8 +28,12 @@ public class UsuarioSerivceImpl implements UsuarioService {
 
     @Override
     public Usuario delete(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        var retorno = repository.findById(id);
+        if (retorno.isPresent()){
+            repository.deleteById(id);
+            return retorno.get();
+        }
+        return null;
     }
 
     @Override

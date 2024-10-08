@@ -44,4 +44,13 @@ public class UsuarioController {
         var umUsuario = service.getById(id);
         return new ModelAndView("usuario/form", "usuario", umUsuario);
     }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView delete (@PathVariable("id") long id) {
+        var umUsuario = service.getById(id);
+        if (umUsuario != null) {
+            service.delete(id);
+        }
+        return new ModelAndView("redirect:/usuarios");
+    }
 }
