@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head th:include="layout :: htmlhead"></head>
+    <body>
+        
+        <nav th:replace="layout :: menu">(menu)</nav>
+
+        <main class="container">
+            <h1>Postagens</h1>
+            <a href="/homepage/novo" class="btn btn-primary">Novo</a>
+            <table class="table" id="tabelapostagens">
+                <thead>
+                    <th>Nome</th>
+                    <th>Corpo do texto</th>
+
+                </thead>
+                <tbody>
+                    <tr th:each="umaPostagem : ${listaPostagens}">
+                        <td th:text="${umUsuario.nome}"></td>
+                        <td th:text="${umaPostagem.corpo}"></td>
+                        <td>
+
+                            <button class=" btn btn-danger js-delete" th:data-id="${umaPostagem.id}">Excluir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+        
+        <div th:include="layout :: footer">(footer)</div>
+        <script th:src="@{/scriptpostagens.js}"></script>
+    </body>
+</html>
+
+
+<div class="modal" tabindex="-1" id="modalpostagem">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Excluir Postagem</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Confirma a exclusão da postagem?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-primary" id="btnsim">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>

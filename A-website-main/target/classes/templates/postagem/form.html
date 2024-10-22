@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head th:include="layout :: htmlhead"></head>
+    <body>
+        
+        <nav th:replace="layout :: menu">(menu)</nav>
+
+        <main class="container">
+            <h1>Postagem</h1>
+            <form th:action="@{/homepage}" method="POST" th:object="${postagem}">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group">
+                    <label for="txtcorpo">Corpo do texto</label>
+                    <input th:field="*{corpo}" id="txtcorpo" class="form-control" type="text">
+                </div>
+                <button type="submit" class="form-control">Enviar</button>
+            </form>
+        </main>
+        
+        <div th:include="layout :: footer">(fooater)</div>
+    </body>
+</html>
