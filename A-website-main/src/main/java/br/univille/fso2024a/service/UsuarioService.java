@@ -6,6 +6,6 @@ import br.univille.fso2024a.entity.Usuario;
 public interface UsuarioService {
     List<Usuario> getAll();
     Usuario save(Usuario usuario);
-    Usuario delete(long id);
-    Usuario getById(long id);
+    Usuario delete(long userid);
+    Usuario getById(long userid);
 }

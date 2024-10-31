@@ -27,18 +27,18 @@ public class UsuarioSerivceImpl implements UsuarioService {
     }
 
     @Override
-    public Usuario delete(long id) {
-        var retorno = repository.findById(id);
+    public Usuario delete(long userid) {
+        var retorno = repository.findById(userid);
         if (retorno.isPresent()){
-            repository.deleteById(id);
+            repository.deleteById(userid);
             return retorno.get();
         }
         return null;
     }
 
     @Override
-    public Usuario getById(long id) {
-        var retorno = repository.findById(id);
+    public Usuario getById(long userid) {
+        var retorno = repository.findById(userid);
         if (retorno.isPresent()){
             return retorno.get();
         }

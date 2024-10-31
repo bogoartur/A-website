@@ -10,8 +10,14 @@
             <form th:action="@{/homepage}" method="POST" th:object="${postagem}">
                 <input type="hidden" th:field="*{id}">
                 <div class="form-group">
-                    <label for="txtcorpo">Corpo do texto</label>
-                    <input th:field="*{corpo}" id="txtcorpo" class="form-control" type="text">
+                    <label for="selectUsuario">Usuário</label>
+                    <select th:field="*{usuario}" id="selectUsuario" class="form-control">
+                        <option th:each="usuario : ${usuarios}" th:value="${usuario.userid}" th:text="${usuario.nome}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="txttexto">Corpo do texto</label>
+                    <input th:field="*{texto}" id="txttexto" class="form-control" type="text">
                 </div>
                 <button type="submit" class="form-control">Enviar</button>
             </form>

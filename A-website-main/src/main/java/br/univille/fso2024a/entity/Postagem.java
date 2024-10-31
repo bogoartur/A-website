@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Postagem {
@@ -24,5 +26,16 @@ public class Postagem {
     }
     public void setTexto(String texto) {
         this.texto = texto;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "userid", nullable = false)
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

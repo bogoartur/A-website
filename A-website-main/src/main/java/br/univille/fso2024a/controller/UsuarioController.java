@@ -39,17 +39,17 @@ public class UsuarioController {
         return new ModelAndView("redirect:/usuarios");
     }
 
-    @GetMapping("/alterar/{id}")
-    public ModelAndView alterar(@PathVariable("id") long id) {
-        var umUsuario = service.getById(id);
+    @GetMapping("/alterar/{userid}")
+    public ModelAndView alterar(@PathVariable("userid") long userid) {
+        var umUsuario = service.getById(userid);
         return new ModelAndView("usuario/form", "usuario", umUsuario);
     }
 
-    @GetMapping("/delete/{id}")
-    public ModelAndView delete (@PathVariable("id") long id) {
-        var umUsuario = service.getById(id);
+    @GetMapping("/delete/{userid}")
+    public ModelAndView delete (@PathVariable("userid") long userid) {
+        var umUsuario = service.getById(userid);
         if (umUsuario != null) {
-            service.delete(id);
+            service.delete(userid);
         }
         return new ModelAndView("redirect:/usuarios");
     }

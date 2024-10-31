@@ -16,8 +16,8 @@
                 </thead>
                 <tbody>
                     <tr th:each="umaPostagem : ${listaPostagens}">
-                        <td th:text="${umUsuario.nome}"></td>
-                        <td th:text="${umaPostagem.corpo}"></td>
+                        <td th:text="${umaPostagem.usuario.nome}"></td>
+                        <td th:text="${umaPostagem.texto}"></td>
                         <td>
 
                             <button class=" btn btn-danger js-delete" th:data-id="${umaPostagem.id}">Excluir</button>

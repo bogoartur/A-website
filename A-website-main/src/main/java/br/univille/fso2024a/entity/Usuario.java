@@ -19,7 +19,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    private long id; 
+    private long userid; 
     @Column(length = 1000, nullable = false)
     private String nome;
     private String email;
@@ -30,11 +30,11 @@ public class Usuario {
     
     //private Date dataNasc;
 
-    public long getId() {
-        return id;
+    public long getUserid() {
+        return userid;
     }
-    public void setId(long id) {
-        this.id = id;
+    public void setUserid(long userid) {
+        this.userid = userid;
     }
     public String getNome() {
         return nome;

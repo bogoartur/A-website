@@ -10,7 +10,7 @@
         let botaoClicado = $(this)
         let id = botaoClicado.attr('data-id')
         $.ajax({
-            url: 'postagem/delete/' + id,
+            url: 'homepage/delete/' + id,
             method: 'GET',
             success: function(){
                 window.location.href = '/homepage'
