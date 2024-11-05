@@ -27,9 +27,15 @@ public class Usuario {
     @DateTimeFormat(pattern="yyyy-mm-dd")
     private Date dataNasc;
     private String senha;
-    
+    private String arroba;
     //private Date dataNasc;
 
+    public String getArroba() {
+        return arroba;
+    }
+    public void setArroba(String arroba) {
+        this.arroba = arroba;
+    }
     public long getUserid() {
         return userid;
     }

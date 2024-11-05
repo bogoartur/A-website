@@ -7,5 +7,5 @@ import br.univille.fso2024a.entity.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-    
-}
+    Usuario findByArroba(String arroba)
+;}
