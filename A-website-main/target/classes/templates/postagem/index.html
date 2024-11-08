@@ -7,7 +7,28 @@
 
         <main class="container">
             <h1>Postagens</h1>
-            <a href="/homepage/novo" class="btn btn-primary">Novo</a>
+
+            <section>
+              <h2>Nova postagem</h2>
+              <form th:action="@{/homepage}" method="post" th:object="${postagem}">
+                <!-- <input type="hidden" th:field="*{usuario.id}" value="...id_do_usuario_logado...">-->
+                <div class="form-group">
+                  <label for="txttexto">Texto</label>
+                  <label th:field="*{texto}"id="txttexto" type="text" required></label>
+                </div>
+                <button type="submit">Postar</button>
+              </form>
+            </section>
+
+            <section>
+              <h2>Postagens recentes</h2>
+              <div th:each="postagem : ${listaPostagens}">
+                <p th:text="${postagem.texto}"></p>
+                <p>Postado por: <span th:text="${postagem.usuario.nome}"></span></p>
+              </div>
+            </section>
+
+            <!-- <a href="/homepage/novo" class="btn btn-primary">Novo</a> 
             <table class="table" id="tabelapostagens">
                 <thead>
                     <th>Nome</th>
@@ -24,7 +45,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table>  -->
         </main>
         
         <div th:include="layout :: footer">(footer)</div>
