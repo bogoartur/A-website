@@ -23,18 +23,20 @@ public class LoginController {
 
     @GetMapping("/login")
     public ModelAndView mostrarLogin() {
-        return new ModelAndView("auth/login/login");
+        return new ModelAndView("auth/login");
     }
 
     @GetMapping("/registro")
     public ModelAndView mostrarRegistro() {
-        return new ModelAndView("auth/registro/registro");
+        ModelAndView modelAndView = new ModelAndView("auth/registro");
+        modelAndView.addObject("usuario", new Usuario());
+        return modelAndView;
     }
 
     @PostMapping("/registro")
     public ModelAndView registrarUsuario(Usuario usuario) {
         usuarioService.registrarUsuario(usuario);
-        return new ModelAndView("redirect:/auth/login/login");
+        return new ModelAndView("redirect:/auth/login");
     }
 
     @PostMapping("login")
