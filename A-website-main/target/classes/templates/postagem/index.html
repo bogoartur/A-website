@@ -11,10 +11,10 @@
             <section>
               <h2>Nova postagem</h2>
               <form th:action="@{/homepage}" method="post" th:object="${postagem}">
-                <!-- <input type="hidden" th:field="*{usuario.id}" value="...id_do_usuario_logado...">-->
+                <input type="hidden" th:field="*{usuario.userid}" value="...id_do_usuario_logado...">
                 <div class="form-group">
                   <label for="txttexto">Texto</label>
-                  <label th:field="*{texto}"id="txttexto" type="text" required></label>
+                  <input th:field="*{texto}"id="txttexto" type="text" required>
                 </div>
                 <button type="submit">Postar</button>
               </form>

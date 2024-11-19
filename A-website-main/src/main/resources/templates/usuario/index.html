@@ -14,7 +14,7 @@
                     <th>Email</th>
                     <th>Senha</th>
                     <th>Data de nascimento</th>
-                    <th>arroba</th>
+                    <th></th>
                 </thead>
                 <tbody>
                     <tr th:each="umUsuario : ${listaUsuarios}">
@@ -22,7 +22,6 @@
                         <td th:text="${umUsuario.email}"></td>
                         <td th:text="${umUsuario.senha}"></td>
                         <td th:text="${umUsuario.nome}"></td>
-                        <td th:text="${umUsuario.arroba}"></td>
                         <td>
                             <a th:href="@{'/usuarios/alterar/' + ${umUsuario.userid}}" class="btn btn-warning">Alterar</a>
                             <button class=" btn btn-danger js-delete" th:data-id="${umUsuario.userid}">Excluir</button>

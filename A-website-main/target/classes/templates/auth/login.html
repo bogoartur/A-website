@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-    <head th:include="layout :: htmlhead"></head>
+    <head th:insert="~{layout :: htmlhead}"></head>
     <body>
         
-        <nav th:replace="layout :: menu">(menu)</nav>
+        <nav th:replace="~{layout :: menu}">(menu)</nav>
 
         <main class="container">
             <h1>Entre em seu A</h1>
             <form action="#" th:action="@{/auth/login}" method="post">
                 <label>Arroba:</label>
-                <input type="text" name="text" required>
+                <input type="text" name="arroba" required>
                 <label>Senha:</label>
                 <input type="password" name="senha" required>
                 <button type="submit" class="form-control">Entrar</button>
@@ -17,6 +17,6 @@
             <a th:href="@{/auth/registro}">Registre-se aqui</a>
         </main>
         
-        <div th:include="layout :: footer">(footer)</div>
+        <div th:insert="~{layout :: footer}">(footer)</div>
     </body>
 </html>

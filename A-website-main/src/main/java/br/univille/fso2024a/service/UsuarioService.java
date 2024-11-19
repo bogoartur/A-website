@@ -10,5 +10,5 @@ public interface UsuarioService {
     Usuario getById(long userid);
 
     Usuario registrarUsuario(Usuario usuario);
-    boolean validaUsuario(String email, String senha);
+    boolean validaUsuario(String arroba, String senha);
 }

@@ -28,8 +28,10 @@ public class PostagemController {
     public ModelAndView index() {
         var listaPostagens = service.getAll();
         var postagem = new Postagem();
-        var usuarios = usuarioService.getAll();
-        return new ModelAndView("postagem/index").addObject("listaPostagens", listaPostagens).addObject("postagem", postagem).addObject("usuarios", usuarios);
+        ModelAndView modelAndView = new ModelAndView("postagem/index");
+        modelAndView.addObject("listaPostagens", listaPostagens);
+        modelAndView.addObject("postagem", postagem);
+        return modelAndView;
     }
 
     @GetMapping("/novo")

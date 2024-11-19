@@ -1,6 +1,7 @@
 package br.univille.fso2024a.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,8 +54,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     public boolean validaUsuario(String arroba, String senha) {
-        Usuario usuario = repository.findByArroba(arroba);
-        return usuario != null && verificaSenha(senha, usuario.getSenha());
+        Optional<Usuario> usuario = repository.findByArroba(arroba);
+        return usuario.isPresent() && verificaSenha(senha, usuario.get().getSenha());
     }
 
     private String criptografaSenha(String senha) {
