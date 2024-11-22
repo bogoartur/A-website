@@ -1,6 +1,7 @@
 package br.univille.fso2024a.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ public class UsuarioController {
     private UsuarioService service;
     
     @GetMapping
+    @PreAuthorize("hasAuthority('APPROLE_Admin')")
     public ModelAndView index(){
         var listaUsuarios = service.getAll();
         return new ModelAndView("usuario/index", "listaUsuarios", listaUsuarios);
