@@ -1,6 +1,11 @@
 package br.univille.fso2024a.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,12 +30,15 @@ public class PostagemController {
 
 
     @GetMapping
-    public ModelAndView index() {
+    public ModelAndView index(@AuthenticationPrincipal OAuth2User principal) {
         var listaPostagens = service.getAll();
         var postagem = new Postagem();
+
         ModelAndView modelAndView = new ModelAndView("postagem/index");
+
         modelAndView.addObject("listaPostagens", listaPostagens);
         modelAndView.addObject("postagem", postagem);
+       
         return modelAndView;
     }
 
@@ -42,9 +50,16 @@ public class PostagemController {
     }
 
     @PostMapping
-    public ModelAndView save(Postagem postagem, @RequestParam Long usuario){
-        Usuario usuarioObj = usuarioService.getById(usuario);
-        postagem.setUsuario(usuarioObj);
+    public ModelAndView save(Postagem postagem, @AuthenticationPrincipal OAuth2User principal ){
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        var emailLogado = principal.getAttribute("preferred_username").toString();
+        String nomeLogado = authentication.getName();
+        var usuario = new Usuario();
+        usuario.setEmail(emailLogado);
+        usuario.setNome(nomeLogado);
+        postagem.setUsuario(usuario);
+        
         service.save(postagem);
         return new ModelAndView("redirect:/homepage");
     }

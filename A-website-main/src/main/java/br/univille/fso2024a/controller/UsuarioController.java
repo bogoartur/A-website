@@ -2,6 +2,9 @@ package br.univille.fso2024a.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,13 +34,23 @@ public class UsuarioController {
     @GetMapping("/novo")
     public ModelAndView novo(){
         var usuario = new Usuario();
-
         return new ModelAndView("usuario/form", "usuario", usuario);
     }
 
     @PostMapping
     public ModelAndView save(Usuario usuario){
         service.save(usuario);
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        Object username = authentication.getPrincipal();
+        System.out.println(username);
+        System.out.println(username);
+        System.out.println(username);
+        System.out.println(username);
+        System.out.println(username);
+        System.out.println(username);
+        System.out.println(username);
+        System.out.println(username);
         return new ModelAndView("redirect:/usuarios");
     }
 

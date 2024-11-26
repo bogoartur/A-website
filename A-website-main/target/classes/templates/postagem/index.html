@@ -11,7 +11,7 @@
             <section>
               <h2>Nova postagem</h2>
               <form th:action="@{/homepage}" method="post" th:object="${postagem}">
-                <input type="hidden" th:field="*{usuario.userid}" value="...id_do_usuario_logado...">
+
                 <div class="form-group">
                   <label for="txttexto">Texto</label>
                   <input th:field="*{texto}"id="txttexto" type="text" required>

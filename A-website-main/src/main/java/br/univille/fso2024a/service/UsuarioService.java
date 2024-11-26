@@ -9,6 +9,4 @@ public interface UsuarioService {
     Usuario delete(long userid);
     Usuario getById(long userid);
 
-    Usuario registrarUsuario(Usuario usuario);
-    boolean validaUsuario(String arroba, String senha);
 }
