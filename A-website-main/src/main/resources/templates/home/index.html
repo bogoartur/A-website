@@ -2,13 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head th:include="layout :: htmlhead"></head>
     <body>
-        
-        <nav th:replace="layout :: menu">(menu)</nav>
+        <div class="container-fluid justify-center">
+            <div class="row">
+                <div class="col-2 col-lg-1 col-xl-2 border-end">
+                    <div th:replace="layout :: menu">(menu)</div>
+                </div>
+                
+                <div class="col-10 col-lg-7 col-xl-6 border-end">
+                    <main>
+                        <h1>asduhasdasdasd</h1>
+                    </main>
+                </div>
+                
+                <div class="col-lg-4 d-none d-lg-block">
+                    <div th:replace="layout :: trends">(trends)</div>
 
-        <main class="container">
-            <h1>qq coisa</h1>
-        </main>
-        
-        <div th:include="layout :: footer">(footer)</div>
+                    <div th:include="layout :: footer">(footer)</div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
