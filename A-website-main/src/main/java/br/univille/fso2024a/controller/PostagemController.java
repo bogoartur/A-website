@@ -33,7 +33,7 @@ public class PostagemController {
     public ModelAndView index(@AuthenticationPrincipal OAuth2User principal) {
         var listaPostagens = service.getAll();
         var postagem = new Postagem();
-
+        
         ModelAndView modelAndView = new ModelAndView("postagem/index");
 
         modelAndView.addObject("listaPostagens", listaPostagens);

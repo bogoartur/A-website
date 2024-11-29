@@ -1,38 +1,77 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head th:fragment="htmlhead">
+  <head th:fragment="htmlhead">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
         <link rel="stylesheet" th:href="@{/webjars/jquery-ui/1.13.2/jquery-ui.css}" />
-        <link rel="stylesheet" th:href="@{/site.css}" />
-    </head>
-    <body> 
-        <nav th:fragment="menu">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
-                  <a class="navbar-brand" href="#">A</a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </nav>
-        </nav>
+        <link rel="stylesheet" th:href="@{/css/style.css}" />
+        <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+  </head>
+
+  <body> 
+    <nav th:fragment="menu">
+      <div class="sidebar d-flex flex-column ps-3">
+        <div class="sidebar-logo mb-4">
+          <a href="/homepage">A</a>
+        </div>
+        
+        <ul class="nav flex-column">
+          <li class="nav-item my-3">
+            <a href="/homepage" class="nav-link d-flex align-items-center">
+              <i class="lni lni-home-2 me-2"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item my-3">
+            <a href="/homepage" class="nav-link d-flex align-items-center">
+              <i class="lni lni-bell-1 me-2"></i>
+              <span>Notificações</span>
+            </a>
+          </li>
+          <li class="nav-item my-3">
+            <a href="/homepage" class="nav-link d-flex align-items-center">
+              <i class="lni lni-envelope-1 me-2"></i>
+              <span>Mensagens</span>
+            </a>
+          </li>
+          <li class="nav-item my-3">
+            <a href="/homepage" class="nav-link d-flex align-items-center">
+              <i class="lni lni-user-4 me-2"></i>
+              <span>Perfil</span>
+            </a>
+          </li>
+        </ul>
+    
+        <div class="nav-footer mt-4">
+          <a href="#" class="nav-link">
+            <span>SAIR</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+    
+
+    <div th:fragment="trends">
+      <div class="trends-sidebar">
+          <h5>Tendências</h5>
+          <ul class="list-unstyled">
+              <li class="trend-item">
+                  <a href="#">#Tendencia1</a>
+              </li>
+              <li class="trend-item">
+                  <a href="#">#Tendencia2</a>
+              </li>
+              <li class="trend-item">
+                  <a href="#">#Tendencia3</a>
+              </li>
+              <li class="trend-item">
+                  <a href="#">#Tendencia4</a>
+              </li>
+          </ul>
+      </div>
+    </div>
+  
+
          
         <div th:fragment="footer" id="footer">
             <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
