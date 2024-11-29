@@ -39,5 +39,6 @@ body{
 }
 
 .nav-footer {
-  margin-top: auto; /* Move o botão SAIR para o final da barra */
+    margin-top: auto; /* Empurra o footer para baixo */
+    text-align: center; /* Centraliza o conteúdo do footer */
 }
