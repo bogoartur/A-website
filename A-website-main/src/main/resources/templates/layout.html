@@ -6,69 +6,93 @@
         <link rel="stylesheet" th:href="@{/webjars/jquery-ui/1.13.2/jquery-ui.css}" />
         <link rel="stylesheet" th:href="@{/css/style.css}" />
         <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
   </head>
 
   <body> 
     <nav th:fragment="menu">
-      <div class="sidebar d-flex flex-column ps-3">
-        <div class="sidebar-logo mb-4">
-          <a href="/homepage">A</a>
-        </div>
-        
-        <ul class="nav flex-column">
-          <li class="nav-item my-3">
-            <a href="/homepage" class="nav-link d-flex align-items-center">
-              <i class="lni lni-home-2 me-2"></i>
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="nav-item my-3">
-            <a href="/homepage" class="nav-link d-flex align-items-center">
-              <i class="lni lni-bell-1 me-2"></i>
-              <span>Notificações</span>
-            </a>
-          </li>
-          <li class="nav-item my-3">
-            <a href="/homepage" class="nav-link d-flex align-items-center">
-              <i class="lni lni-envelope-1 me-2"></i>
-              <span>Mensagens</span>
-            </a>
-          </li>
-          <li class="nav-item my-3">
-            <a href="/homepage" class="nav-link d-flex align-items-center">
-              <i class="lni lni-user-4 me-2"></i>
-              <span>Perfil</span>
-            </a>
-          </li>
-        </ul>
-    
-        <div class="nav-footer mt-4">
-          <a href="#" class="nav-link">
-            <span>SAIR</span>
-          </a>
-        </div>
-      </div>
+                    <div class="sidebar">
+                        <div class="sidebar-logo mb-4">
+                        <a href="/homepage">A</a>
+                        </div>
+                        
+                        <ul class="nav flex-column">
+                        <li class="nav-item my-3">
+                            <a href="/homepage" class="nav-link d-flex align-items-center">
+                            <i class="lni lni-home-2 me-2"></i>
+                            <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item my-3">
+                            <a href="/homepage" class="nav-link d-flex align-items-center">
+                            <i class="lni lni-bell-1 me-2"></i>
+                            <span>Notificações</span>
+                            </a>
+                        </li>
+                        <li class="nav-item my-3">
+                            <a href="/homepage" class="nav-link d-flex align-items-center">
+                            <i class="lni lni-envelope-1 me-2"></i>
+                            <span>Mensagens</span>
+                            </a>
+                        </li>
+                        <li class="nav-item my-3">
+                            <a href="/homepage" class="nav-link d-flex align-items-center">
+                            <i class="lni lni-crown-3 me-2"></i>
+                            <span>Premium</span>
+                            </a>
+                        </li>
+                        </ul>
+                    
+                        <div class="nav-footer">
+                        <a href="#" class="nav-link">
+                        <i class="lni lni-user-4 me-2"></i>
+                            <span th:text="${umUsuario != null ? umUsuario.nome : 'Usuário não encontrado'}"></span>
+                        </a>
+                        </div>
+                    </div>
     </nav>
     
 
     <div th:fragment="trends">
-      <div class="trends-sidebar">
-          <h5>Tendências</h5>
-          <ul class="list-unstyled">
-              <li class="trend-item">
-                  <a href="#">#Tendencia1</a>
-              </li>
-              <li class="trend-item">
-                  <a href="#">#Tendencia2</a>
-              </li>
-              <li class="trend-item">
-                  <a href="#">#Tendencia3</a>
-              </li>
-              <li class="trend-item">
-                  <a href="#">#Tendencia4</a>
-              </li>
-          </ul>
-      </div>
+                <div class="trends-sidebar p-3">
+                    <div class="search-bar mb-3">
+                        <input id="barradepesquisa" class="form-control" placeholder="Pesquisar">
+                    </div>
+                </div>
+                <div class="trends-box p-3 rounded border border-secondary">
+                    <h5 class="mb-3">O que está acontecendo</h5>
+                    <ul class="list-unstyled">
+                        <li class="trend-item mb-5">
+                            <a href="#">
+                                <p class="small mb-0 unstyled text-secondary">Assunto do momento</p>
+                                <span>#Tendencia1</span>
+                                <p class="small text-secondary mb-0 unstyled">27 mil posts</p>
+                            </a>
+                        </li>
+                        <li class="trend-item mb-5">
+                            <a href="#">
+                                <p class="small text-secondary mb-0 unstyled">Assunto do momento</p>
+                                <span>#Tendencia2</span>
+                                <p class="small text-secondary mb-0 unstyled">Subtitulo</p>
+                            </a>
+                        </li>
+                        <li class="trend-item mb-5">
+                            <a href="#">
+                                <p class="small text-secondary mb-0 unstyled">Assunto do momento</p>
+                                <span>#Tendencia3</span>
+                                <p class="small text-secondary mb-0 unstyled">Subtitulo</p>
+                            </a>
+                        </li>
+                        <li class="trend-item mb-5">
+                            <a href="#">
+                                <p class="small text-secondary mb-0 unstyled">Assunto do momento</p>
+                                <span>#Tendencia4</span>
+                                <p class="small text-secondary mb-0 unstyled">Subtitulo</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
     </div>
   
 

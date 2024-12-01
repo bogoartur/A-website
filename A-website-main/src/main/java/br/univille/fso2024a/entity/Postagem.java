@@ -23,6 +23,17 @@ public class Postagem {
     public void setId(long id) {
         this.id = id;
     }
+
+    @Column(nullable = false)
+    private int curtidas = 0;
+    
+    public int getCurtidas() {
+        return curtidas;
+    }
+    public void setCurtidas(int curtidas) {
+        this.curtidas = curtidas;
+    }
+
     @Column(length = 240, nullable = false)
     private String texto;
     public String getTexto() {
@@ -57,5 +68,9 @@ public class Postagem {
     }
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public void aumentaCurtidas() {
+        this.curtidas++;
     }
 }

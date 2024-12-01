@@ -48,6 +48,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         return null;
     }
+    @Override
+    public Usuario findByEmail(String email) {
+        var retorno = repository.findByEmail(email);
+        return retorno;
+    }
 
 
 }
