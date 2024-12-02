@@ -3,6 +3,7 @@ package br.univille.fso2024a.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.univille.fso2024a.entity.Postagem;
@@ -17,7 +18,7 @@ public class PostagemServiceImpl implements PostagemService {
 
     @Override
     public List<Postagem> getAll() {
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Order.desc("createdAt")));
     }
 
     @Override

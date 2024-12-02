@@ -6,6 +6,8 @@
         <link rel="stylesheet" th:href="@{/webjars/jquery-ui/1.13.2/jquery-ui.css}" />
         <link rel="stylesheet" th:href="@{/css/style.css}" />
         <link rel="stylesheet" href="https://cdn.lineicons.com/5.0/lineicons.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
   </head>
 
   <body> 
@@ -45,7 +47,7 @@
                         <div class="nav-footer">
                         <a href="#" class="nav-link">
                         <i class="lni lni-user-4 me-2"></i>
-                            <span class="">Art(h)ur</span>
+                            <span th:text="${umUsuario != null ? umUsuario.nome : 'Usuário não encontrado'}"></span>
                         </a>
                         </div>
                     </div>

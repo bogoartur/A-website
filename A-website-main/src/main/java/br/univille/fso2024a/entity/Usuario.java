@@ -22,6 +22,7 @@ public class Usuario {
     private long userid; 
     @Column(length = 1000, nullable = false)
     private String nome;
+    @Column(unique = true)
     private String email;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="yyyy-mm-dd")
@@ -29,6 +30,13 @@ public class Usuario {
     private String senha;
     private String arroba;
     //private Date dataNasc;
+
+    public Usuario() {}
+
+    public Usuario(String nome, String email) {
+        this.nome = nome;
+        this.email = email;
+    }
 
     public String getArroba() {
         return arroba;

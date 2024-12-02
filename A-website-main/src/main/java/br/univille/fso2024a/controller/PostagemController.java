@@ -1,5 +1,8 @@
 package br.univille.fso2024a.controller;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,31 +17,55 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.univille.fso2024a.entity.Curtida;
 import br.univille.fso2024a.entity.Postagem;
 import br.univille.fso2024a.entity.Usuario;
+import br.univille.fso2024a.repository.CurtidaRepository;
 import br.univille.fso2024a.service.PostagemService;
 import br.univille.fso2024a.service.UsuarioService;
+import br.univille.fso2024a.service.impl.UsuarioServiceImpl;
+
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
-@RequestMapping("/homepage")
+@RequestMapping("/")
 public class PostagemController {
     @Autowired
     private PostagemService service;
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioServiceImpl usuarioService;
 
+        @Autowired
+    private CurtidaRepository curtidaRepository;
 
     @GetMapping
     public ModelAndView index(@AuthenticationPrincipal OAuth2User principal) {
         var listaPostagens = service.getAll();
         var postagem = new Postagem();
+        
+        String emailLogado = principal.getAttribute("preferred_username");
+        String nomeLogado = principal.getAttribute("name");
 
-        ModelAndView modelAndView = new ModelAndView("postagem/index");
+        Usuario umUsuario = usuarioService.findByEmail(emailLogado);
+
+        if (umUsuario == null) {
+            umUsuario = new Usuario(nomeLogado, emailLogado);
+            usuarioService.save(umUsuario);
+        }
+
+        Set<Long> curtidasDoUsuario = curtidaRepository.findByUsuario(umUsuario)
+        .stream()
+        .map(curtida -> curtida.getPostagem().getId())
+        .collect(Collectors.toSet());
+
+        ModelAndView modelAndView = new ModelAndView("home/index");
 
         modelAndView.addObject("listaPostagens", listaPostagens);
         modelAndView.addObject("postagem", postagem);
-       
+        modelAndView.addObject("umUsuario", umUsuario);
+        modelAndView.addObject("curtidasDoUsuario", curtidasDoUsuario);
         return modelAndView;
     }
 
@@ -51,17 +78,15 @@ public class PostagemController {
 
     @PostMapping
     public ModelAndView save(Postagem postagem, @AuthenticationPrincipal OAuth2User principal ){
-        SecurityContext context = SecurityContextHolder.getContext();
-        Authentication authentication = context.getAuthentication();
-        var emailLogado = principal.getAttribute("preferred_username").toString();
-        String nomeLogado = authentication.getName();
-        var usuario = new Usuario();
-        usuario.setEmail(emailLogado);
-        usuario.setNome(nomeLogado);
-        postagem.setUsuario(usuario);
+
+        String emailLogado = principal.getAttribute("preferred_username").toString();
+        Usuario usuarioLogado = usuarioService.findByEmail(emailLogado);
+
+        postagem.setUsuario(usuarioLogado);
         
         service.save(postagem);
-        return new ModelAndView("redirect:/homepage");
+        
+        return new ModelAndView("redirect:/");
     }
 
     @GetMapping("/delete/{id}")
@@ -70,6 +95,27 @@ public class PostagemController {
         if (umaPostagem != null) {
             service.delete(id);
         }
-        return new ModelAndView("redirect:/homepage");
+        return new ModelAndView("redirect:/");
+    }
+
+ @PostMapping("/like/{id}")
+    public String curtir(@PathVariable("id") long id, @AuthenticationPrincipal OAuth2User principal) {
+        var postagem = service.getById(id);
+        String emailLogado = principal.getAttribute("preferred_username");
+        var usuario = usuarioService.findByEmail(emailLogado);
+
+        var curtidaOpcao = curtidaRepository.findByPostagemAndUsuario(postagem,usuario);
+        if (curtidaOpcao.isPresent()) {
+            curtidaRepository.delete(curtidaOpcao.get());
+            postagem.setCurtidas(postagem.getCurtidas()-1);
+        } else {
+            Curtida curtida = new Curtida();
+            curtida.setPostagem(postagem);
+            curtida.setUsuario(usuario);
+            curtidaRepository.save(curtida);
+            postagem.setCurtidas(postagem.getCurtidas()+1);
+        }
+service.save(postagem);
+        return "redirect:/";
     }
 }

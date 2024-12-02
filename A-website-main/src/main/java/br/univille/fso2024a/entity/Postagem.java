@@ -1,5 +1,7 @@
 package br.univille.fso2024a.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 
 @Entity
 public class Postagem {
@@ -20,6 +23,17 @@ public class Postagem {
     public void setId(long id) {
         this.id = id;
     }
+
+    @Column(nullable = false)
+    private int curtidas = 0;
+    
+    public int getCurtidas() {
+        return curtidas;
+    }
+    public void setCurtidas(int curtidas) {
+        this.curtidas = curtidas;
+    }
+
     @Column(length = 240, nullable = false)
     private String texto;
     public String getTexto() {
@@ -29,6 +43,22 @@ public class Postagem {
         this.texto = texto;
     }
 
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+    @PrePersist
+    public void prePersist() {
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "userid", nullable = false)
     private Usuario usuario;
@@ -38,5 +68,9 @@ public class Postagem {
     }
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public void aumentaCurtidas() {
+        this.curtidas++;
     }
 }

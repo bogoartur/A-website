@@ -10,16 +10,63 @@
                 
                 <div class="col-6 col-lg-7 col-xl-6 border-end border-secondary">
                     <main>
-                        <h1>asduhasdasdasd</h1>
-                    </main>
-                </div>
-                
-                <div class="col-lg-2 d-none d-lg-block">
-                    <div th:replace="layout :: trends">(trends)</div>
-
-                    <div th:include="layout :: footer">(footer)</div>
+                        
+                        <section>
+                          <h2>Nova postagem</h2>
+                          <form th:action="@{/}" method="post" th:object="${postagem}">
+            
+                            <div class="form-group">
+                              <input th:field="*{texto}"id="txttexto" type="text" maxlength="240" required>
+                            </div>
+                            <div class="form-actions d-flex align-items-center">
+                            <span class="media-icons me-3">
+                              <i class="fas fa-image"></i>
+                              <i class="fas fa-video"></i>
+                            </span>
+                            <button type="submit" class="btnn btn-primary">Postar</button>
+                          </div>
+                          </form>
+                        </section>
+                      
+                        <section>
+                          <br>
+                          <h2>Postagens recentes</h2>
+                          <div th:each="postagem : ${listaPostagens}" class="post-card">
+                            <div class="post-header">
+                            <p class="post-user"  th:text="${postagem.usuario.nome}"></p>
+                            <i class="fas fa-ellipsis-h three-dots-icon"></i>
+                          </div>
+                          <div class="post-body">
+                            <p th:text="${postagem.texto}"></p>
+                          </div>
+                          <div class="post-footer">
+                            <span class="post-icon">
+                              
+                              <form th:action="@{/like/{id}(id=${postagem.id})}" method="post" style="display: inline;">
+                              
+                              <span th:text="${postagem.curtidas}"></span>
+                              <button type="submit" class="btn btn-link">
+                              <i class="fas" th:classappend="${#lists.contains(curtidasDoUsuario, postagem.id) ? 'fa-heart liked' : 'fa-heart'}"></i>
+                                </button>
+                            </form>
+                            </span>
+                            <span class="post-icon">
+                              <i class="fas fa-comment"></i>
+                            </span>
+                          </div>
+                            
+                          </div>
+                        </section>
+                        
+                      </main>
+                    </div>
+                    
+                    <div class="col-lg-2 d-none d-lg-block">
+                        <div th:replace="layout :: trends">(trends)</div>
+    
+                        <div th:include="layout :: footer">(footer)</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </body>
-</html>
+        </body>
+    </html>

@@ -8,5 +8,6 @@ public interface UsuarioService {
     Usuario save(Usuario usuario);
     Usuario delete(long userid);
     Usuario getById(long userid);
+    Usuario findByEmail(String email);
 
 }
