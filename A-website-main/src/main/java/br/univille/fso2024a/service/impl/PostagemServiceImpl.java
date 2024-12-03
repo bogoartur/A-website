@@ -18,7 +18,7 @@ public class PostagemServiceImpl implements PostagemService {
 
     @Override
     public List<Postagem> getAll() {
-        return repository.findAll(Sort.by(Sort.Order.desc("createdAt")));
+        return repository.findAll(Sort.by(Sort.Order.desc("criadaEm")));
     }
 
     @Override

@@ -24,7 +24,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService service;
     
-    @GetMapping
+    @GetMapping("/admin")
     @PreAuthorize("hasAuthority('APPROLE_Admin')")
     public ModelAndView index(){
         var listaUsuarios = service.getAll();
