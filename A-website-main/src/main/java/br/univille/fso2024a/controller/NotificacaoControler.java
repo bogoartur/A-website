@@ -45,14 +45,14 @@ public class NotificacaoControler {
         String emailLogado = principal.getAttribute("preferred_username");
 var postagem = new Postagem();
 
-        Usuario umUsuario = usuarioService.findByEmail(emailLogado);
+        Usuario usuarioLogado = usuarioService.findByEmail(emailLogado);
         var listaPostagens = postagemService.getAll();
         var notificacoes = notificacaoService.getAll();
         
         ModelAndView modelAndView = new ModelAndView("notificacao/index");
         modelAndView.addObject("listaPostagens", listaPostagens);
         modelAndView.addObject("postagem", postagem);
-        modelAndView.addObject("umUsuario", umUsuario);
+        modelAndView.addObject("usuarioLogado", usuarioLogado);
         modelAndView.addObject("notificacoes", notificacoes);
         return modelAndView;
     }

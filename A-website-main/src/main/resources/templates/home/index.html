@@ -34,7 +34,7 @@
 
                           <div th:each="postagem : ${listaPostagens}" class="post-card">
                             <div class="post-header">
-                            <a class="link-sem-sublinhado" th:href="@{'/usuarios/' + ${postagem.usuario.userid}}"><p class="post-user"  th:text="${postagem.usuario.nome}"></p></a>
+                            <a class="link-sem-sublinhado" th:href="@{'/usuarios/perfil/' + ${postagem.usuario.userid}}"><p class="post-user"  th:text="${postagem.usuario.nome}"></p></a>
                             <i class="fas fa-ellipsis-h three-dots-icon"></i>
                           </div>
                           <div class="post-body">
@@ -59,7 +59,7 @@
                               <h6>Comentários</h6>
                               <div th:each="comentario : ${postagem.comentarios}" class="comentario-card">
                               <div class="comentario-header">
-                                <a class="link-sem-sublinhado" th:href="@{'/usuarios/' + ${comentario.usuario.userid}}"><p class="comentario-user" th:text="${comentario.usuario.nome}"></p></a>
+                                <a class="link-sem-sublinhado" th:href="@{'/usuarios/perfil/' + ${comentario.usuario.userid}}"><p class="comentario-user" th:text="${comentario.usuario.nome}"></p></a>
                               </div>
                               <div class="comentario-body">
                                 <p th:text="${comentario.texto}"></p>

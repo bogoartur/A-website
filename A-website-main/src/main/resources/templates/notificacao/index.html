@@ -15,7 +15,7 @@
                     <section>
                         <h2 class="titulo">Notificações</h2>
                         <div th:each="notificacao : ${notificacoes}" class="post-card">
-                            <div th:if="${notificacao.postagem != null and notificacao.postagem.usuario == umUsuario}">
+                            <div th:if="${notificacao.postagem != null and notificacao.postagem.usuario == usuarioLogado}">
                                 <a th:href="@{'/postagem/' + ${notificacao.postagem.id}}" class="link-sem-sublinhado">
                                     <span th:text="${notificacao.mensagem}"></span>
                                     <small th:text="${#temporals.format(notificacao.criadaEm, 'dd/MM/yyyy HH:mm')}"></small>
@@ -32,7 +32,7 @@
                                 </div>
                             </div>
 
-                            <div th:if="${notificacao.comentario != null}">
+                            <div th:if="${notificacao.comentario != null and notificacao.comentario.usuario == usuarioLogado}">
                             <a th:href="@{'/comentario/' + ${notificacao.comentario.id}}" class="link-sem-sublinhado">
                                 <span th:text="${notificacao.mensagem}"></span>
                                 <small th:text="${#temporals.format(notificacao.criadaEm, 'dd/MM/yyyy HH:mm')}"></small>

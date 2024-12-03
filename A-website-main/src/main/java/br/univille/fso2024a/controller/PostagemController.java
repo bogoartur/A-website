@@ -62,19 +62,20 @@ public class PostagemController {
         String emailLogado = principal.getAttribute("preferred_username");
         String nomeLogado = principal.getAttribute("name");
 
-        Usuario umUsuario = usuarioService.findByEmail(emailLogado);
 
-        if (umUsuario == null) {
-            umUsuario = new Usuario(nomeLogado, emailLogado);
-            usuarioService.save(umUsuario);
+        Usuario usuarioLogado = usuarioService.findByEmail(emailLogado);
+
+        if (usuarioLogado == null) {
+            usuarioLogado = new Usuario(nomeLogado, emailLogado);
+            usuarioService.save(usuarioLogado);
         }
-        Set<Long> curtidasDePostagens = curtidaRepository.findByUsuario(umUsuario)
+        Set<Long> curtidasDePostagens = curtidaRepository.findByUsuario(usuarioLogado)
         .stream()
         .filter(curtida -> curtida.getPostagem() != null)  // Only for posts
         .map(curtida -> curtida.getPostagem().getId())
         .collect(Collectors.toSet());
     
-    Set<Long> curtidasDeComentarios = curtidaRepository.findByUsuario(umUsuario)
+    Set<Long> curtidasDeComentarios = curtidaRepository.findByUsuario(usuarioLogado)
         .stream()
         .filter(curtida -> curtida.getComentario() != null)  // Only for comments
         .map(curtida -> curtida.getComentario().getId())
@@ -85,7 +86,7 @@ public class PostagemController {
 
         modelAndView.addObject("listaPostagens", listaPostagens);
         modelAndView.addObject("postagem", postagem);
-        modelAndView.addObject("umUsuario", umUsuario);
+        modelAndView.addObject("usuarioLogado", usuarioLogado);
         modelAndView.addObject("curtidasDePostagens", curtidasDePostagens);
         modelAndView.addObject("curtidasDeComentarios", curtidasDeComentarios);
         return modelAndView;
