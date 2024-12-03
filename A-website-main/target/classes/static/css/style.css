@@ -7,6 +7,7 @@ html, body {
     justify-content: center;
     align-items: flex-start;
     margin: 0;
+    overflow: auto;
   }
   
   .container-fluid {
@@ -16,10 +17,10 @@ html, body {
     border-radius: 8px;
   }
 
-*, body{
+body{
     font-family: Poppins, sans-serif;
     color:antiquewhite;
-    background-color: #000;
+    background-color: #0a0a0a;
 }
 
 .sidebar {
@@ -33,6 +34,7 @@ html, body {
   
   .sidebar-logo a {
     font-size: 3rem;
+
     text-decoration: none;
     color: #fff;
     font-family: "Anta", sans-serif;
@@ -62,14 +64,11 @@ html, body {
     width: 200px; 
     margin-top: auto; /* Empurra o footer para baixo */
     text-align: center; /* Centraliza o conteúdo do footer */
-    white-space: nowrap; /* Impede quebra de linha */
-    overflow: hidden; /* Esconde o conteúdo que excede a largura */
-    text-overflow: ellipsis; /* Adiciona '...' ao final do texto que exceder a largura */
+
   }
   
   .trends-sidebar {
     border-radius: 8px; /* Cantos arredondados */
-    position: sticky;
 }
 
 .trends-box {
@@ -130,10 +129,13 @@ form .form-group input {
   border-radius: 5px; 
 }
 
+.titulo {
+  margin-bottom: 30px;
+}
 
 section {
-
-  margin: 0 auto; 
+  padding: 0;
+  margin: 0; 
   padding: 1.5rem; 
   border: 1px solid #555; 
   border-radius: 8px; 
@@ -248,4 +250,108 @@ section {
 
 .liked {
     color: #007bff;
+}
+
+.link-sem-sublinhado {
+  text-decoration: none;
+}
+/*.row>*{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+} */
+
+* {
+  color: antiquewhite;
+}
+
+.modal-header, .modal-footer {
+  background-color: #2a2a2a; /* Fundo um pouco mais claro para separação */
+  border-bottom: 1px solid #444; /* Linha divisória */
+}
+
+.modal-content {
+  background-color: #1c1c1c; /* Cor de fundo escura para o modal */
+  color: antiquewhite;      /* Mantém a cor do texto em contraste */
+  border-radius: 12px;      /* Bordas arredondadas para um visual moderno */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* Sombra para criar profundidade */
+  border: 1px solid #333;  /* Contorno sutil para separação */
+}
+
+.modal-footer {
+  border-top: 1px solid #444; /* Linha divisória */
+}
+
+.modal-body {
+  padding: 20px; /* Espaço interno para o conteúdo */
+}
+
+body {
+  overflow: auto; /* Garante que o restante do site continue navegável */
+}
+
+
+.comentario-card {
+  width: 95%;
+  background-color: #252525; 
+  border: 1px solid #333; 
+  border-radius: 8px; 
+  padding: 1rem; 
+  margin-bottom: 1rem; 
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); 
+  color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  justify-self: center;
+}
+
+
+.comentario-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+
+}
+
+.comentario-user {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #ffffff; 
+}
+
+
+.comentario-body {
+
+  font-size: 1rem;
+  line-height: 1;
+  color: #dcdcdc; 
+  word-wrap: break-word; 
+}
+
+
+.comentario-footer {
+  display: flex;
+  justify-content: flex-start; 
+  gap: 1.5rem; 
+  margin-top: 0.2rem;
+}
+
+
+.comentario-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem; 
+  cursor: pointer;
+  font-size: 1rem;
+  color: #888; 
+}
+
+.comentario-icon i:hover {
+  color: #007bff; 
+  transform: scale(1.1); 
+  transition: color 0.2s, transform 0.2s;
+}
+
+h6 {
+  padding-left: 1rem;
 }

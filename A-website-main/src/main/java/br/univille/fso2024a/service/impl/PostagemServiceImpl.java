@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.univille.fso2024a.entity.Postagem;
+import br.univille.fso2024a.entity.Usuario;
 import br.univille.fso2024a.repository.PostagemRepository;
 import br.univille.fso2024a.service.PostagemService;
 
@@ -18,7 +19,12 @@ public class PostagemServiceImpl implements PostagemService {
 
     @Override
     public List<Postagem> getAll() {
-        return repository.findAll(Sort.by(Sort.Order.desc("createdAt")));
+        return repository.findAll(Sort.by(Sort.Order.desc("criadaEm")));
+    }
+
+    @Override
+    public List<Postagem> getByUsuario(Usuario usuario) {
+        return repository.findByUsuarioOrderByCriadaEmDesc(usuario);
     }
 
     @Override

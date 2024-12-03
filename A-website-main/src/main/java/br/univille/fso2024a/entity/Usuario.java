@@ -1,18 +1,17 @@
 package br.univille.fso2024a.entity;
 
-import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import java.util.ArrayList;
+import java.util.List;
 
-//import java.sql.Date;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.OneToMany;
+
 
 @Entity
 public class Usuario {
@@ -24,11 +23,8 @@ public class Usuario {
     private String nome;
     @Column(unique = true)
     private String email;
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="yyyy-mm-dd")
-    private Date dataNasc;
-    private String senha;
-    private String arroba;
+
+
     //private Date dataNasc;
 
     public Usuario() {}
@@ -38,12 +34,6 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getArroba() {
-        return arroba;
-    }
-    public void setArroba(String arroba) {
-        this.arroba = arroba;
-    }
     public long getUserid() {
         return userid;
     }
@@ -62,17 +52,17 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getSenha() {
-        return senha;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Postagem> postagens = new ArrayList<>();
+
+
+    public List<Postagem> getPostagens() {
+        return postagens;
     }
-    public void setSenha(String senha) {
-        this.senha = senha;
+
+    public void setPostagens(List<Postagem> postagens) {
+        this.postagens = postagens;
     }
-    //public Date getDataNasc() {
-      //  return dataNasc;
-    //}
-    //public void setDataNasc(Date dataNasc) {
-       // this.dataNasc = dataNasc;
-    //}
     
 }

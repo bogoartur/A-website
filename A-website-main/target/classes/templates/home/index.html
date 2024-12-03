@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-    <head th:include="layout :: htmlhead"></head>
+    <head th:insert="~{layout :: htmlhead}"></head>
+    <title>Home</title>
     <body>
         <div class="container-fluid justify-center">
             <div class="row">
-                <div class="col-2 col-lg-1 col-xl-2 border-end border-secondary offset-1">
-                    <div th:replace="layout :: menu">(menu)</div>
+                <div class="col-2 col-lg-1 col-xl-2  border-secondary offset-1">
+                    <div th:replace="~{layout :: menu}">(menu)</div>
                 </div>
                 
-                <div class="col-6 col-lg-7 col-xl-6 border-end border-secondary">
+                <div class="col-6 col-lg-7 col-xl-6 border-start border-end border-secondary">
                     <main>
                         
                         <section>
@@ -29,32 +30,53 @@
                         </section>
                       
                         <section>
-                          <br>
-                          <h2>Postagens recentes</h2>
+                          
+                          <h2 class="titulo">Postagens recentes</h2>
+
                           <div th:each="postagem : ${listaPostagens}" class="post-card">
                             <div class="post-header">
-                            <p class="post-user"  th:text="${postagem.usuario.nome}"></p>
+                            <a class="link-sem-sublinhado" th:href="@{'/usuarios/perfil/' + ${postagem.usuario.userid}}"><p class="post-user"  th:text="${postagem.usuario.nome}"></p></a>
                             <i class="fas fa-ellipsis-h three-dots-icon"></i>
                           </div>
                           <div class="post-body">
                             <p th:text="${postagem.texto}"></p>
                           </div>
                           <div class="post-footer">
-                            <span class="post-icon">
-                              
-                              <form th:action="@{/like/{id}(id=${postagem.id})}" method="post" style="display: inline;">
-                              
+                            <span class="post-icon">                     
+                              <form th:action="@{/like/postagem/{id}(id=${postagem.id})}" method="post" style="display: inline;">
                               <span th:text="${postagem.curtidas}"></span>
                               <button type="submit" class="btn btn-link">
-                              <i class="fas" th:classappend="${#lists.contains(curtidasDoUsuario, postagem.id) ? 'fa-heart liked' : 'fa-heart'}"></i>
-                                </button>
+                                <i class="fas" th:classappend="${#lists.contains(curtidasDePostagens, postagem.id) ? 'fa-heart liked' : 'fa-heart'}"></i>
+                              </button>
                             </form>
                             </span>
                             <span class="post-icon">
+                              <button type="button" class="btn btn-link" th:data-id="${postagem.id}" data-bs-toggle="modal" data-bs-target="#modalComentario">
                               <i class="fas fa-comment"></i>
+                            </button>
                             </span>
                           </div>
-                            
+                            <div class="comentarios">
+                              <h6>Comentários</h6>
+                              <div th:each="comentario : ${postagem.comentarios}" class="comentario-card">
+                              <div class="comentario-header">
+                                <a class="link-sem-sublinhado" th:href="@{'/usuarios/perfil/' + ${comentario.usuario.userid}}"><p class="comentario-user" th:text="${comentario.usuario.nome}"></p></a>
+                              </div>
+                              <div class="comentario-body">
+                                <p th:text="${comentario.texto}"></p>
+                              </div>
+                              <div class="comentario-footer">
+                                <span class="post-icon">
+                                  <form th:action="@{/like/comentario/{id}(id=${comentario.id})}" method="post" style="display: inline;">
+                                <span th:text="${comentario.curtidas}"></span>
+                                <button type="submit" class="btn btn-link">
+                                  <i class="fas" th:classappend="${#lists.contains(curtidasDeComentarios, comentario.id) ? 'fa-heart liked' : 'fa-heart'}"></i>
+                                </button>
+                              </form>
+                                </span>
+                              </div>
+                            </div>
+                            </div>
                           </div>
                         </section>
                         
@@ -62,11 +84,34 @@
                     </div>
                     
                     <div class="col-lg-2 d-none d-lg-block">
-                        <div th:replace="layout :: trends">(trends)</div>
+                        <div th:replace="~{layout :: trends}">(trends)</div>
     
-                        <div th:include="layout :: footer">(footer)</div>
+                        <div th:insert="~{layout :: footer}">(footer)</div>
                     </div>
                 </div>
             </div>
+            <script th:src="@{/scriptpostagens.js}"></script>
         </body>
     </html>
+
+    <div class="modal fade" tabindex="-1" id="modalComentario">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Comentar</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="formComentario" method="post" th:action="@{/comentario/{postagemId}(postagemId=${postagem.id})}">
+              <textarea class="form-control" id="textoComentario" name="texto" rows="3" maxlength="240" placeholder="Digite seu comentário" required></textarea>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="btnEnviarComentario">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    

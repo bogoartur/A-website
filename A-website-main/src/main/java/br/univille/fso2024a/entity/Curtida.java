@@ -16,7 +16,7 @@ public class Curtida {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "postagem_id", nullable = false)
+    @JoinColumn(name = "postagem_id", nullable = true)
     private Postagem postagem;
 
     @ManyToOne
@@ -47,4 +47,17 @@ public class Curtida {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "comentario_id", nullable = true)
+    private Comentario comentario;
+
+    public Comentario getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(Comentario comentario) {
+        this.comentario = comentario;
+    }
+
 }
