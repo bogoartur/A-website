@@ -34,7 +34,10 @@
 
                           <div th:each="postagem : ${listaPostagens}" class="post-card">
                             <div class="post-header">
+                              <div class="post-header-content">
+                              <img th:src="${postagem.usuario.caminhoFotoPerfil != null ? postagem.usuario.caminhoFotoPerfil : '/profile/padrao.jpg'}" alt="">
                             <a class="link-sem-sublinhado" th:href="@{'/usuarios/perfil/' + ${postagem.usuario.userid}}"><p class="post-user"  th:text="${postagem.usuario.nome}"></p></a>
+                          </div>
                             <i class="fas fa-ellipsis-h three-dots-icon"></i>
                           </div>
                           <div class="post-body">
