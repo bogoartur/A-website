@@ -37,7 +37,6 @@ public class UsuarioController {
     private PostagemServiceImpl postagemService;
     
     @GetMapping("/admin")
-    @PreAuthorize("hasAuthority('APPROLE_Admin')")
     public ModelAndView index(){
         var listaUsuarios = service.getAll();
         
@@ -53,10 +52,8 @@ public class UsuarioController {
     @PostMapping
     public ModelAndView save(Usuario usuario){
         service.save(usuario);
-        SecurityContext context = SecurityContextHolder.getContext();
-        Authentication authentication = context.getAuthentication();
-        Object username = authentication.getPrincipal();
-        return new ModelAndView("redirect:/usuarios");
+
+        return new ModelAndView("redirect:/usuarios/admin");
     }
 
     @GetMapping("/alterar/{userid}")

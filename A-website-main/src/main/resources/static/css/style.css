@@ -177,12 +177,32 @@ section {
   gap: 0.5rem;
 }
 
+.post-header-content {
+  display: flex;
+  justify-content: left; 
+  align-items: center; 
+  margin-bottom: 0.5rem;
+
+}
+
+.post-header-content p {
+  font-size: 140%;
+  padding-left: 15px;
+
+}
 
 .post-header {
   display: flex;
   justify-content: space-between; 
   align-items: center; 
   margin-bottom: 0.5rem;
+
+}
+
+.post-header img {
+ 
+  width: 65px;
+  border-radius: 100px;
 }
 
 .post-user {
@@ -352,4 +372,20 @@ body {
 
 h6 {
   padding-left: 1rem;
+}
+
+.info-perfil img {
+  border-radius: 100px;
+  height: 200px;
+}
+
+.info-perfil {
+  display: flex;
+justify-content: start;
+align-items: center;
+}
+
+
+.info-perfil h2 {
+padding-left: 20px;
 }

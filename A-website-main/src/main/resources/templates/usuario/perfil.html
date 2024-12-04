@@ -13,7 +13,10 @@
             <div class="col-6 col-lg-7 col-xl-6 border-end border-secondary">
                 <main>
                     <section>
+                        <div class="info-perfil">
+                        <img th:src="${umUsuario.caminhoFotoPerfil != null ? umUsuario.caminhoFotoPerfil : '/profile/padrao.jpg'}" alt="">
                         <h2 class="titulo" th:text="${umUsuario.nome}"></h2>
+                    </div>
                     </section>
                     <section>
                           

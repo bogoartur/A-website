@@ -141,6 +141,9 @@ public class Startup {
                 usuario = new Usuario();
                 usuario.setNome(nome);
                 usuario.setEmail(email);
+                usuario.setCaminhoFotoPerfil("/profile/usuario" + usuario.getUserid() + ".png");
+                usuarioService.save(usuario);
+                usuario.setCaminhoFotoPerfil("/profile/usuario" + usuario.getUserid() + ".png");
                 usuarioService.save(usuario);
             }
         }

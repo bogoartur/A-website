@@ -80,8 +80,18 @@ public class PostagemController {
         .filter(curtida -> curtida.getComentario() != null)  // Only for comments
         .map(curtida -> curtida.getComentario().getId())
         .collect(Collectors.toSet());
-    
-
+        
+        String fotoArtur = "/profile/artur.png"; 
+        
+        String fotoArthur = "/profile/arthur.png"; 
+        if (nomeLogado.equals("ARTUR BOGO DOS SANTOS")) {
+            usuarioLogado.setCaminhoFotoPerfil(fotoArtur);
+            usuarioService.save(usuarioLogado);
+        }
+        if (nomeLogado.equals("ARTHUR FRANCISCO FERREIRA TORRES SOUZA")) {
+            //usuarioLogado.setCaminhoFotoPerfil(fotoArthur);
+            //usuarioService.save(usuarioLogado);
+        }
         ModelAndView modelAndView = new ModelAndView("home/index");
 
         modelAndView.addObject("listaPostagens", listaPostagens);

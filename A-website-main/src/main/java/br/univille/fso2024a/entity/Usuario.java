@@ -64,5 +64,16 @@ public class Usuario {
     public void setPostagens(List<Postagem> postagens) {
         this.postagens = postagens;
     }
+
+    private String caminhoFotoPerfil;
+
+
+    public String getCaminhoFotoPerfil() {
+        return caminhoFotoPerfil;
+    }
+
+    public void setCaminhoFotoPerfil(String caminhoFotoPerfil) {
+        this.caminhoFotoPerfil = caminhoFotoPerfil;
+    }
     
 }

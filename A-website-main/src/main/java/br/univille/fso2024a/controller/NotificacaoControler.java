@@ -41,9 +41,9 @@ public class NotificacaoControler {
 
     @GetMapping
     public ModelAndView index(@AuthenticationPrincipal OAuth2User principal) {
-
+        var postagem = new Postagem();
         String emailLogado = principal.getAttribute("preferred_username");
-var postagem = new Postagem();
+
 
         Usuario usuarioLogado = usuarioService.findByEmail(emailLogado);
         var listaPostagens = postagemService.getAll();
