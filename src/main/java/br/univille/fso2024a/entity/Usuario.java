@@ -1,31 +1,47 @@
 package br.univille.fso2024a.entity;
 
-//import java.sql.Date;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+
 
 @Entity
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    private long id;
+    private long userid; 
     @Column(length = 1000, nullable = false)
     private String nome;
+    @Column(unique = true)
     private String email;
-    private String senha;
-    
+
+
     //private Date dataNasc;
 
-    public long getId() {
-        return id;
+    public Usuario() {}
+
+    public Usuario(String nome, String email) {
+        this.nome = nome;
+        this.email = email;
     }
-    public void setId(long id) {
-        this.id = id;
+
+    public long getUserid() {
+        return userid;
+    }
+    public void setUserid(long userid) {
+        this.userid = userid;
     }
     public String getNome() {
         return nome;
@@ -39,17 +55,52 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getSenha() {
-        return senha;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Postagem> postagens = new ArrayList<>();
+
+
+    public List<Postagem> getPostagens() {
+        return postagens;
     }
-    public void setSenha(String senha) {
-        this.senha = senha;
+
+    public void setPostagens(List<Postagem> postagens) {
+        this.postagens = postagens;
     }
-    //public Date getDataNasc() {
-      //  return dataNasc;
-    //}
-    //public void setDataNasc(Date dataNasc) {
-       // this.dataNasc = dataNasc;
-    //}
+
+    private String caminhoFotoPerfil;
+
+
+    public String getCaminhoFotoPerfil() {
+        return caminhoFotoPerfil;
+    }
+
+    public void setCaminhoFotoPerfil(String caminhoFotoPerfil) {
+        this.caminhoFotoPerfil = caminhoFotoPerfil;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "seguindo", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "seguido_id"))
+    private List<Usuario> seguindo = new ArrayList<>();
+
+    public List<Usuario> getSeguindo() {
+        return seguindo;
+    }
+
+    public void setSeguindo(List<Usuario> seguindo) {
+        this.seguindo = seguindo;
+    }
+
+    @ManyToMany(mappedBy = "seguindo")
+    private List<Usuario> seguidores = new ArrayList<>();
+
+
+    public List<Usuario> getSeguidores() {
+        return seguidores;
+    }
+
+    public void setSeguidores(List<Usuario> seguidores) {
+        this.seguidores = seguidores;
+    }
     
 }

@@ -7,22 +7,50 @@
 
         <main class="container">
             <h1>Usuarios</h1>
-            <table class="table">
+            <a href="/usuarios/novo" class="btn btn-primary">Novo</a>
+            <table class="table" id="tabelausuarios">
                 <thead>
                     <th>Nome</th>
                     <th>Email</th>
-                    <th>Senha</th>
+
+                    <th>Data de nascimento</th>
+                    <th></th>
                 </thead>
                 <tbody>
                     <tr th:each="umUsuario : ${listaUsuarios}">
                         <td th:text="${umUsuario.nome}"></td>
                         <td th:text="${umUsuario.email}"></td>
-                        <td th:text="${umUsuario.email}"></td>
+
+                        <td th:text="${umUsuario.nome}"></td>
+                        <td>
+                            <a th:href="@{'/usuarios/alterar/' + ${umUsuario.userid}}" class="btn btn-warning">Alterar</a>
+                            <button class=" btn btn-danger js-delete" th:data-id="${umUsuario.userid}">Excluir</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </main>
         
         <div th:include="layout :: footer">(footer)</div>
+        <script th:src="@{/scriptusuario.js}"></script>
     </body>
 </html>
+
+
+<div class="modal" tabindex="-1" id="modalusuario">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Excluir Usuario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Confirma a exclusão do usuario?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-primary" id="btnsim">Sim</button>
+        </div>
+      </div>
+    </div>
+  </div>
